@@ -1,0 +1,17 @@
+{
+	"name": "com.miniit.altertask",
+	"version": "1.0.0",
+	"dependencies": {
+	},
+	"unity": "2020.3",
+	"author": {
+		"name": "Mini IT",
+		"url": "http://mini-it.com"
+	},
+	"keywords": [
+		"MiniIT",
+		"Task"
+	],
+	"displayName": "Mini IT - Alter Task",
+	"description": "Mini IT - Task Wrapper"
+}
