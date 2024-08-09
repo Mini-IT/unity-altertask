@@ -1,5 +1,5 @@
 #if UNITY_WEBGL
-//#define FORCE_UNITASK
+#define FORCE_UNITASK
 #endif
 
 #if !FORCE_UNITASK
