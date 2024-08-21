@@ -26,7 +26,12 @@ namespace MiniIT.Threading.Tasks
 		}
 
 		public TaskAwaiter<T> GetAwaiter() => _task.GetAwaiter();
-		
+
+		public void Forget() { }
+
+		public static AlterTask<T> FromResult(T result)
+			=> new AlterTask<T>(Task<T>.FromResult(result));
+
 		public static bool operator ==(AlterTask<T> a, AlterTask<T> b)
 			=> a.Task == b.Task;
 		public static bool operator ==(AlterTask<T> alterTask, Task<T> task)

@@ -29,6 +29,9 @@ namespace MiniIT.Threading.Tasks
 
 		public void Forget() => _task.Forget();
 
+		public static AlterTask<T> FromResult(T result)
+			=> new AlterTask<T>(UniTask.FromResult(result));
+
 		public static bool operator ==(AlterTask<T> a, AlterTask<T> b)
 			=> Equals(a.Task, b.Task);
 		public static bool operator ==(AlterTask<T> alterTask, UniTask<T> task)
