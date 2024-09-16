@@ -82,7 +82,7 @@ namespace MiniIT.Threading
 					}
 				}
 
-				await TaskHelper.Yield();
+				await AlterTask.Yield();
 
 				if (_count < 0)
 				{
@@ -111,7 +111,7 @@ namespace MiniIT.Threading
 					}
 				}
 
-				await TaskHelper.Yield();
+				await AlterTask.Yield();
 
 				if (_count < 0)
 				{

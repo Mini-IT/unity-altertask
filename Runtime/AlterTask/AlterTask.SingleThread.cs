@@ -13,7 +13,7 @@ using YieldAwaitable = Cysharp.Threading.Tasks.YieldAwaitable;
 
 namespace MiniIT.Threading
 {
-	public static class TaskHelper
+	public static class AlterTask
 	{
 		public static UniTask Run(Action action)
 		{
