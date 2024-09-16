@@ -1,8 +1,8 @@
 #if UNITY_WEBGL
-#define FORCE_UNITASK
+#define SINGLE_THREAD
 #endif
 
-#if !FORCE_UNITASK
+#if !SINGLE_THREAD
 
 using System.Threading;
 
