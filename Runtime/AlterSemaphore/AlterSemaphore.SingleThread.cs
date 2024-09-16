@@ -1,13 +1,14 @@
 #if UNITY_WEBGL
-#define FORCE_UNITASK
+#define SINGLE_THREAD
 #endif
 
-#if FORCE_UNITASK
+#if SINGLE_THREAD
 
 using System;
 using System.Diagnostics;
 using System.Threading;
-using MiniIT.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using MiniIT.Threading;
 
 namespace MiniIT.Threading
 {
@@ -61,14 +62,14 @@ namespace MiniIT.Threading
 			}
 		}
 
-		public AlterTask WaitAsync()
+		public UniTask WaitAsync()
 			=> WaitAsync(CancellationToken.None);
-		public AlterTask<bool> WaitAsync(int millisecondsTimeout)
+		public UniTask<bool> WaitAsync(int millisecondsTimeout)
 			=> WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
-		public AlterTask<bool> WaitAsync(int millisecondsTimeout, CancellationToken cancellationToken)
+		public UniTask<bool> WaitAsync(int millisecondsTimeout, CancellationToken cancellationToken)
 			=> WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout), cancellationToken);
 
-		public async AlterTask WaitAsync(CancellationToken cancellationToken)
+		public async UniTask WaitAsync(CancellationToken cancellationToken)
 		{
 			while (true)
 			{
@@ -81,24 +82,21 @@ namespace MiniIT.Threading
 					}
 				}
 
-				await AlterTask.Yield();
+				await TaskHelper.Yield();
 
 				if (_count < 0)
 				{
 					throw new ObjectDisposedException(this.ToString());
 				}
 
-				if (cancellationToken.IsCancellationRequested)
-				{
-					throw new OperationCanceledException(cancellationToken);
-				}
+				cancellationToken.ThrowIfCancellationRequested();
 			}
 		}
 
-		public AlterTask<bool> WaitAsync(TimeSpan timeout)
+		public UniTask<bool> WaitAsync(TimeSpan timeout)
 			=> WaitAsync(timeout, CancellationToken.None);
 
-		public async AlterTask<bool> WaitAsync(TimeSpan timeout, CancellationToken cancellationToken)
+		public async UniTask<bool> WaitAsync(TimeSpan timeout, CancellationToken cancellationToken)
 		{
 			var stopwatch = Stopwatch.StartNew();
 
@@ -113,17 +111,14 @@ namespace MiniIT.Threading
 					}
 				}
 
-				await AlterTask.Yield();
+				await TaskHelper.Yield();
 
 				if (_count < 0)
 				{
 					throw new ObjectDisposedException(this.ToString());
 				}
 
-				if (cancellationToken.IsCancellationRequested)
-				{
-					throw new OperationCanceledException(cancellationToken);
-				}
+				cancellationToken.ThrowIfCancellationRequested();
 
 				if (stopwatch.Elapsed >= timeout)
 				{
