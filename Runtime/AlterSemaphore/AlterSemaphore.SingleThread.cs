@@ -8,7 +8,6 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MiniIT.Threading;
 
 namespace MiniIT.Threading
 {
@@ -16,7 +15,7 @@ namespace MiniIT.Threading
 	{
 		public int CurrentCount => _count;
 
-		private static readonly object s_lock = new object();
+		private readonly object s_lock = new object();
 
 		private int _count;
 		private readonly int _maxCount;
