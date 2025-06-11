@@ -29,7 +29,6 @@ namespace MiniIT.Threading
 
 		public static void RunAndForget(Action action, CancellationToken cancellationToken = default)
 		{
-			var completion = new UniTaskCompletionSource();
 			Wrap(action).Forget();
 		}
 
