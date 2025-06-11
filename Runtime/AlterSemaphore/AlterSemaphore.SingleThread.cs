@@ -110,6 +110,12 @@ namespace MiniIT.Threading
 					}
 				}
 
+				// Check timeout before awaiting to match SemaphoreSlim behaviour
+				if (stopwatch.Elapsed >= timeout)
+				{
+					return false;
+				}
+
 				await AlterTask.Yield();
 
 				if (_count < 0)
@@ -121,11 +127,9 @@ namespace MiniIT.Threading
 
 				if (stopwatch.Elapsed >= timeout)
 				{
-					break;
+					return false;
 				}
 			}
-
-			return false;
 		}
 
 		public void Dispose()
