@@ -134,7 +134,10 @@ namespace MiniIT.Threading
 
 		public void Dispose()
 		{
-			_count = -1;
+			lock (s_lock)
+			{
+				_count = -1;
+			}
 		}
 	}
 }
