@@ -27,6 +27,7 @@ namespace MiniIT.Threading
 			return UniTask.FromResult(result);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RunAndForget(Action action, CancellationToken _ = default)
 		{
 			action.Invoke();
