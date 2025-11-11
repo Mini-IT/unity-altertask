@@ -14,7 +14,7 @@ using YieldAwaitable = System.Runtime.CompilerServices.YieldAwaitable;
 
 namespace MiniIT.Threading
 {
-	public static class AlterTask
+	public static partial class AlterTask
 	{
 		public static Task Run(Action action)
 		{

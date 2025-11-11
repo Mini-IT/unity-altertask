@@ -13,7 +13,7 @@ using YieldAwaitable = Cysharp.Threading.Tasks.YieldAwaitable;
 
 namespace MiniIT.Threading
 {
-	public static class AlterTask
+	public static partial class AlterTask
 	{
 		public static UniTask Run(Action action)
 		{
@@ -27,17 +27,11 @@ namespace MiniIT.Threading
 			return UniTask.FromResult(result);
 		}
 
-		public static void RunAndForget(Action action, CancellationToken cancellationToken = default)
-		{
-			Wrap(action).Forget();
-		}
-
-		public static UniTask Wrap(Action action)
+		public static void RunAndForget(Action action, CancellationToken _ = default)
 		{
 			action.Invoke();
-			return UniTask.CompletedTask;
 		}
-		
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static UniTask Delay(TimeSpan delay)
 			=> UniTask.Delay(delay);
